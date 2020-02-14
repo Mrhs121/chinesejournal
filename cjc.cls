@@ -51,79 +51,7 @@
 \RequirePackage[numbers,sort&compress]{natbib}
 \newcommand\cjc@strifeq{\csname str_if_eq_x:nnTF\endcsname}
 \newcommand\cjc@fontset{\csname g__ctex_fontset_tl\endcsname}
-\cjc@strifeq{\cjc@fontset}{fandol}{
-  \setmainfont[
-    Extension      = .otf,
-    UprightFont    = *-regular,
-    BoldFont       = *-bold,
-    ItalicFont     = *-italic,
-    BoldItalicFont = *-bolditalic,
-  ]{texgyretermes}
-  \setsansfont[
-    Extension      = .otf,
-    UprightFont    = *-regular,
-    BoldFont       = *-bold,
-    ItalicFont     = *-italic,
-    BoldItalicFont = *-bolditalic,
-  ]{texgyreheros}
-  \setmonofont[
-    Extension      = .otf,
-    UprightFont    = *-regular,
-    BoldFont       = *-bold,
-    ItalicFont     = *-italic,
-    BoldItalicFont = *-bolditalic,
-    Scale          = MatchLowercase,
-  ]{texgyrecursor}
-  \ClassWarningNoLine{cjc}{%
-    You are using Fandol font family.\MessageBreak
-    Some glyphs may be missing.\MessageBreak
-    Please switch to a high-quality font set
-  }
-}{
-  \setmainfont{Times New Roman}
-  \setsansfont[Scale=MatchLowercase]{Arial}
-  \cjc@strifeq{\cjc@fontset}{mac}{
-    \setmonofont[Scale=MatchLowercase]{Menlo}
-  }{
-    \setmonofont[Scale=MatchLowercase]{Courier New}
-  }
-}
-\cjc@strifeq{\cjc@fontset}{mac}{
-  \setCJKmainfont[
-       UprightFont = * Light,
-          BoldFont = Heiti SC Medium,
-        ItalicFont = Kaiti SC,
-    BoldItalicFont = Kaiti SC Bold,
-  ]{Songti SC}
-  \setCJKsansfont[BoldFont=* Medium]{Heiti SC}
-  \setCJKfamilyfont{zhsong}[
-       UprightFont = * Light,
-          BoldFont = * Bold,
-  ]{Songti SC}
-  \setCJKfamilyfont{zhhei}[BoldFont=* Medium]{Heiti SC}
-  \setCJKfamilyfont{zhkai}[BoldFont=* Bold]{Kaiti SC}
-  \xeCJKsetwidth{‘’“”}{1em}
-}{
-  \xeCJKsetup{EmboldenFactor=2}
-  \cjc@strifeq{\cjc@fontset}{windows}{
-    \IfFileExists{C:/bootfont.bin}{
-      \setCJKmainfont[
-        BoldFont   = SimHei,
-        ItalicFont = KaiTi_GB2312,
-      ]{SimSun}
-      \setCJKfamilyfont{zhkai}{KaiTi_GB2312}
-    }{
-      \setCJKmainfont[
-        BoldFont   = SimHei,
-        ItalicFont = KaiTi
-      ]{SimSun}
-      \setCJKfamilyfont{zhkai}{KaiTi}
-    }
-    \setCJKsansfont{SimHei}
-    \setCJKfamilyfont{zhsong}{SimSun}
-    \setCJKfamilyfont{zhhei}{SimHei}
-  }{}
-}
+\renewcommand{\baselinestretch}{1.25} % 1.22 --- 1.25倍行距
 \unimathsetup{
   math-style = ISO,
   bold-style = ISO,
@@ -151,19 +79,7 @@
   ]{xits-math}
   \setmathfont[range={cal,bfcal},StylisticSet=1]{xits-math.otf}
 \fi
-\cjc@strifeq{\cjc@fontset}{mac}{
-  \newfontfamily\cjc@circlefont{Songti SC Light}
-}{
-  \cjc@strifeq{\cjc@fontset}{windows}{
-    \newfontfamily\cjc@circlefont{SimSun}
-  }{
-    \ifcjc@xitsnew
-      \newfontfamily\cjc@circlefont{XITS-Regular.otf}
-    \else
-      \newfontfamily\cjc@circlefont{xits-regular.otf}
-    \fi
-  }
-}
+
 \newdimen\bp@
 \bp@=1bp
 \newcommand\cjc@setchinese{%
@@ -230,6 +146,16 @@
     \centering
     \heiti\zihao{2}\cjc@title\par
   \endgroup
+    \vspace*{12\bp@}%
+  \begingroup
+    \centering
+    \heiti\zihao{-4}\cjc@authors\par
+  \endgroup
+    \vspace*{7\bp@}%
+  \begingroup
+    \centering
+    \heiti\zihao{-5}\cjc@email\par
+  \endgroup
   \vspace*{7.8\bp@}%
   \begingroup
     \zihao{-5}%
@@ -245,12 +171,23 @@
     \centering
     \bfseries\zihao{4}\@nameuse{cjc@title*}\par
   \endgroup
+  \vspace*{12\bp@}%
+  \begingroup
+    \centering
+    \bfseries\zihao{-4}\@nameuse{cjc@authors*}\par
+  \endgroup
+  \vspace*{7\bp@}%
+  \begingroup
+    \centering
+    \bfseries\zihao{-5}\@nameuse{cjc@email*}\par
+  \endgroup
   \vspace{5\bp@}%
   \begingroup
     \zihao{-5}%
     \textbf{Abstract}\quad\@nameuse{cjc@abstract*}\par
     \textbf{Key words}\quad\@nameuse{cjc@keywords*}\par
   \endgroup
+    \vspace*{12\bp@}%
 }
 \renewenvironment{abstract}{%
     \if@twocolumn
@@ -393,6 +330,8 @@
     linktoc            = all,
     unicode            = true,
     psdextra           = true,
+    colorlinks,
+    citecolor=green,
     hidelinks,
   }
   \AtBeginDocument{%
