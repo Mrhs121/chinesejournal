@@ -41,3 +41,6 @@ make doc        # 编译生成 cjc.pdf
 make            # 编译生成论文 main.pdf
 make clean      # 删除编译过程中生成的临时文件
 ```
+
+在原作者版本基础上粗暴的添加了显示作者的功能
+![截图](https://github.com/Mrhs121/chinesejournal/blob/master/screenshot.png)
